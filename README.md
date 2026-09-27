@@ -1,2 +1,9 @@
-# tif2001-Kelompok11-UMKM_PenjualanProdukBarang
-Proyek Pengembangan Aplikasi UMKM_PenjualanProdukBarang- TIF2001 Software Development
+# UMKM_PenjualanProdukBarang
+# Anggota
+1. Galang Shakti Ramadhan Putra Setiawan
+1. Risfalda Hanum Ihwan
+1. Wildan Farhin
+# Deskripsi Singkat Proyek
+.
+.
+# Fitur Utama
