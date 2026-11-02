@@ -282,7 +282,7 @@ function DialogFrame({ title, subtitle, onClose, children, wide = false }) {
   );
 }
 
-function AuthDialog({ onClose, onSubmit }) {
+export function AuthDialog({ onClose, onSubmit }) {
   const [mode, setMode] = useState('login');
   const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
