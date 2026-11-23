@@ -17,6 +17,12 @@ Server berjalan di `http://localhost:3000`. Endpoint pemeriksaan: `GET /api/heal
 
 Admin demo lokal: `admin@localkarya.test` / `KediriDemo123!`. Ganti `JWT_SECRET` dan `ADMIN_PASSWORD` di `.env` sebelum memakai backend di lingkungan selain lokal. Kredensial demo ini tidak aman untuk produksi.
 
+## Menjalankan tes
+
+```powershell
+npm test
+```
+
 ## Endpoint
 
 - `GET /api/categories`
