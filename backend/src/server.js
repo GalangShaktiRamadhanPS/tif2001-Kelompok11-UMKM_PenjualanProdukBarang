@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs');
 const cors = require('cors');
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const { canTransitionOrderStatus, isValidOrderStatus } = require('./order-status');
 
 const app = express();
 const port = Number(process.env.PORT || 3000);
@@ -355,11 +356,13 @@ app.get('/api/admin/orders', authenticate, requireAdmin, (_request, response) =>
 app.patch('/api/admin/orders/:id/status', authenticate, requireAdmin, (request, response, next) => {
   try {
     const id = parsePositiveInteger(request.params.id, 'id');
-    const allowedStatuses = ['pending', 'processing', 'shipped', 'completed', 'cancelled'];
     const status = request.body.status;
-    if (!allowedStatuses.includes(status)) throw httpError(400, 'Status pesanan tidak valid.');
+    if (!isValidOrderStatus(status)) throw httpError(400, 'Status pesanan tidak valid.');
     const order = database.prepare('SELECT * FROM orders WHERE id = ?').get(id);
     if (!order) throw httpError(404, 'Pesanan tidak ditemukan.');
+    if (!canTransitionOrderStatus(order.status, status)) {
+      throw httpError(409, 'Pesanan yang sudah dibatalkan tidak dapat diaktifkan kembali.');
+    }
 
     database.exec('BEGIN IMMEDIATE');
     try {
